@@ -1,4 +1,5 @@
-FROM ubuntu:16.04  #ubuntu:latest cannot work on old kernel(e.g. centos6.5[kernel 2.6]).
+FROM ubuntu:16.04
+# ubuntu:latest cannot work on old kernel(e.g. centos6.5[kernel 2.6]).
 ARG mirror_src=0
 
 RUN	if [[ $mirror_src != 0 ]]; then sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list; fi	\
