@@ -1,0 +1,55 @@
+
+_doc_smerge_base="docker run --rm -it -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/docker/data/smerge/root:/root"
+_doc_smerge_base_local=" $_doc_smerge_base -e DISPLAY=unix$DISPLAY"
+_doc_smerge_base_remote="$_doc_smerge_base -e DISPLAY=:${DISPLAY##*:} --net=host -v $HOME/.Xauthority:/root/.Xauthority"
+
+_smerge_doc_arg=''
+_smerge_arg=''
+_doc_smerge_get_arg() {
+    _smerge_doc_arg=$1
+    shift
+    _smerge_arg=$*
+    if [[ $_smerge_doc_arg == '-' ]]; then
+        _smerge_doc_arg=''
+    fi
+    echo docker arg: $_smerge_doc_arg
+    echo smerge arg: $_smerge_arg
+    echo
+}
+
+doc_run_xqin_smerge_local() {
+	xhost +
+    local docArg=$1
+    if [[ $docArg == '-' ]]; then docArg=''; fi
+    shift
+	$_doc_smerge_base_local $docArg xqin:smerge $*
+	xhost -
+}
+alias doc.run.xqin.smerge.local='doc_run_xqin_smerge_local'
+doc_run_xqin_smerge_remote() {
+    local docArg=$1
+    if [[ $docArg == '-' ]]; then docArg=''; fi
+    shift
+	$_doc_smerge_base_remote $docArg xqin:smerge $*
+}
+alias doc.run.xqin.smerge.remote='doc_run_xqin_smerge_remote'
+
+
+doc_run_xqin93_smerge_local() {
+	xhost +
+    local docArg=$1
+    if [[ $docArg == '-' ]]; then docArg=''; fi
+    shift
+	$_doc_smerge_base_local $docArg xqin93/smerge $*
+	xhost -
+}
+alias doc.run.xqin93.smerge.local='doc_run_xqin93_smerge_local'
+doc_run_xqin93_smerge_remote() {
+    local docArg=$1
+    if [[ $docArg == '-' ]]; then docArg=''; fi
+    shift
+	$_doc_smerge_base_remote $docArg xqin93/smerge $*
+}
+alias doc.run.xqin93.smerge.remote='doc_run_xqin93_smerge_remote'
+
+
