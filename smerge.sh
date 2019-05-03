@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $# < 1 || ($1 != '-' && $# < 3) ]]; then
+if [[ $# != 0 && $1 != '-' && $# < 3 ]]; then
 #    echo bad args: [$*]
 #    echo
     echo Usage:
@@ -12,7 +12,7 @@ fi
 pName='root'
 pUid=0
 pGid=0
-if [[ $1 != '-' ]]; then
+if [[ $# != 0 && $1 != '-' ]]; then
     pName=$1
     pUid=$2
     pGid=$3
