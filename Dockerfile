@@ -1,13 +1,13 @@
 FROM ubuntu:16.04
 # ubuntu:latest cannot work on old kernel(e.g. centos6.5[kernel 2.6]).
 ARG mirror_src=0
-COPY ./smerge.sh /tmp
+COPY ./smerge.sh /bin/smerge.doc.sh
 
 RUN	set -x ; if [ $mirror_src -ne 0 ]; then sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list; fi	\
-	&& mkdir /smerge.doc && cp /tmp/smerge.sh /smerge.doc/ && chmod +x /smerge.doc/smerge.sh		\
-	&& apt-get update			\
-	&& apt-get -y install wget	\
-	&& apt-get -y install gnupg	\
+	&& chmod +x /bin/smerge.doc.sh		\
+	&& apt-get update					\
+	&& apt-get -y install wget			\
+	&& apt-get -y install gnupg			\
 	&& wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg |  apt-key add -	\
 	&& apt-get -y install apt-transport-https	\
 	&& echo "deb https://download.sublimetext.com/ apt/stable/" |  tee /etc/apt/sources.list.d/sublime-text.list	\
@@ -22,5 +22,5 @@ RUN	set -x ; if [ $mirror_src -ne 0 ]; then sed -i 's/archive.ubuntu.com/mirrors
 #USER xqin
 
 #CMD ["bash", "-c", "smerge & wait"]
-ENTRYPOINT [ "/smerge.doc/smerge.sh" ]
+ENTRYPOINT [ "/bin/smerge.doc.sh" ]
 
