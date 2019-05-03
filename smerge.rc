@@ -52,4 +52,19 @@ doc_run_xqin93_smerge_remote() {
 }
 alias doc.run.xqin93.smerge.remote='doc_run_xqin93_smerge_remote'
 
-
+doc_dbg_xqin93_smerge_local() {
+	xhost +
+    local docArg=$1
+    if [[ $docArg == '-' ]]; then docArg=''; fi
+    shift
+	$_doc_smerge_base_local $docArg xqin93/smerge:dev $*
+	xhost -
+}
+alias doc.dbg.xqin93.smerge.local='doc_dbg_xqin93_smerge_local'
+doc_dbg_xqin93_smerge_remote() {
+    local docArg=$1
+    if [[ $docArg == '-' ]]; then docArg=''; fi
+    shift
+	$_doc_smerge_base_remote $docArg xqin93/smerge:dev $*
+}
+alias doc.dbg.xqin93.smerge.remote='doc_dbg_xqin93_smerge_remote'
