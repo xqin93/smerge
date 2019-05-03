@@ -25,8 +25,10 @@ if [[ $pUid != 0 ]]; then
     useradd -r -l -d /home/$pName --create-home -u $pUid -g $pGid $pName            \
     || (echo create user err. ; exit 30;)
     #echo created. `id $pName`
+    ln -s /root/.Xauthority /home/$pName
 
-    gosu $pName 'echo run as `id` ; smerge'
+    echo -n 'run as ' ; gosu $pName id
+    gosu $pName smerge
 else
     echo run as `id`
     smerge
