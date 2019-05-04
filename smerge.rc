@@ -4,6 +4,7 @@ _doc_smerge_base="docker run --rm -it               \
     -v $HOME/docker/data/smerge/root:/root          \
     -v $HOME/docker/data/smerge/home:/home          \
     -v $HOME/git.doc:/git.doc                       \
+    -v $HOME/tools:$HOME/tools:ro                   \
 "
 _doc_smerge_base_local=" $_doc_smerge_base -e DISPLAY=unix$DISPLAY"
 _doc_smerge_base_remote="$_doc_smerge_base -e DISPLAY=:${DISPLAY##*:} --net=host -v $HOME/.Xauthority:/root/.Xauthority"
