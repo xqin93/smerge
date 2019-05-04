@@ -1,5 +1,5 @@
 
-_doc_smerge_base="docker run --rm -it               \
+_doc_smerge_base="docker run --rm                   \
     -v /tmp/.X11-unix:/tmp/.X11-unix                \
     -v $HOME/docker/data/smerge/root:/root          \
     -v $HOME/docker/data/smerge/home:/home          \
